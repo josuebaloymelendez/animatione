@@ -1,0 +1,156 @@
+.nav-menu { 
+    .items-list { @include flex-all($align: center); }
+
+    .item {
+        @include flex-all($align: center);
+        margin-right: 15px;
+
+        &:nth-child(2) {
+            a { 
+                @include hover {
+                    em { color: $secondary-color; }
+                } 
+            }
+        }
+
+        &:last-child {
+            margin-right: 0; 
+
+            a { 
+                @include svg-icon($width: 20px, $height: 20px, $padding: 0, $fill-color: $primary-color, $hover-fill: $secondary-color);
+
+                @include hover {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        a {
+            color: $secondary-color;
+            font-size: .75rem;
+            transition: all .3s ease-in-out;
+
+            em {
+                color: $primary-color;
+                font-style: normal;
+            }
+
+            @include hover-color($primary-color);
+        }
+    }
+}
+
+.nav-footer {
+    > .content-title { 
+        padding: 10px 0;
+        color: rgba($secondary-color, .4); 
+        text-align: center;
+    } 
+
+    .items-list {
+        @include flexbox;
+        border: {
+            top: 2px solid rgba($color-light-200, .35);
+            bottom: 2px solid rgba($color-light-200, .35);
+        }
+
+        > .item {
+            @include flex(1);
+            position: relative;
+            overflow: hidden;
+
+            &.item-active {
+                &:before {
+                    top: 0;
+                    opacity: 1;
+                    background-color: $secondary-color;
+                }
+
+                .item-name { 
+                    color: $color-light-100; 
+
+                    .second-line { color: rgba($color-light-100, .45); }
+                }
+            }
+
+            @include mask-fullsize {
+                top: 100%;
+                background-color: $primary-color;
+                opacity: 0;
+                transition: all .3s ease-in-out;
+            }
+
+            @include hover {
+                &:before {
+                    top: 0;
+                    opacity: 1;
+                }
+
+                .item-name { 
+                    color: $color-light-100; 
+
+                    .second-line { color: rgba($color-light-100, .45); }
+                }
+
+                .sub-list { 
+                    top: 0;
+                    opacity: 1;
+                }
+            }
+        }
+
+        .item-name {
+            @include flex-all($direction: column, $justify: center, $align: center);
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100px;
+            color: $secondary-color; 
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color .3s ease-in-out;
+
+            .first-line {
+                font: {
+                    size: 1.6em;
+                    weight: 700;
+                }
+            }
+
+            .second-line {
+                color: $color-dark-300;
+                font-size: .85em;
+            }
+        }
+    }
+
+    .sub-list {
+        @include flex-all($justify: center, $align: center);
+        position: absolute;
+        z-index: 3;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($primary-color, .9);
+        transition: all .3s ease-in-out;
+
+        .item:last-child .item-inner:after { content: none; }
+
+        .item-inner {
+            display: block;
+            color: $color-primary;
+            transition: color .3s ease-in-out;
+
+            &:after {
+                content: "/";
+                margin: 0 8px;
+            }
+
+            @include hover-color($color-dark-100) {
+                &:after { color: $color-light-100; }
+            }
+        }
+    }
+}

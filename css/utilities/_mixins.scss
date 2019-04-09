@@ -1,0 +1,154 @@
+// Media Queries
+@mixin point($point) {
+    @if $point == phone {
+         @media (max-width: $vs-media) { @content };
+    }
+    @if $point == tablet-port {
+         @media (max-width: $vm-media) { @content };
+    }
+    @if $point == tablet-land {
+         @media (max-width: $vl-media) { @content };
+    }
+}
+
+// Image
+@mixin image-replace($width: null, $height: null, $image: null) {
+	@include bg-contain;
+	display: block;
+	overflow: hidden;
+	height: $height;
+	width: $width;
+	max-width: 100%;
+	white-space: nowrap;
+	text-indent: 200%;
+	color: transparent;
+	background: {
+		position: center center;
+		repeat: no-repeat;
+	}
+	
+	@if $image {
+		background-image: url('#{$image}');
+	}
+}
+
+// Background-image
+@mixin bg-cover{
+	background: {
+		repeat: no-repeat;
+		position: center center;
+		size: cover;
+	}
+}
+
+@mixin bg-contain {
+	background: {
+		repeat: no-repeat;
+		position: center center;
+		size: contain;
+	}
+}
+
+// Hovers
+@mixin hover($descriptor: null) {
+	@if $descriptor != null {
+		&:hover, 
+		&:focus,
+		&#{$descriptor} {
+			@content;
+		} 
+	} @else {
+		&:hover, 
+		&:focus {
+			@content;
+		}
+	}
+}
+
+@mixin hover-color($color, $descriptor: null) {
+	@include hover($descriptor) {
+		color: $color;
+		@content;
+	}
+}
+
+@mixin hover-bg-color($bg-color, $text-color: null, $descriptor: null) {
+	@include hover($descriptor){
+		background-color: $bg-color;
+		color: $text-color;
+		@content;
+	}
+}
+
+// Pseudo-content
+@mixin pseudo($pseudo: "before"){
+	&:#{$pseudo}{
+		content: "";
+		display: block;
+		@content;
+	}
+}
+
+@mixin pseudo-both{
+	&:before, &:after{
+		content: "";
+		display: block;
+		@content;
+	}
+}
+
+@mixin mask($pseudo: "before") {
+	position: relative;
+	
+	@include pseudo($pseudo) { 
+		position: absolute; 
+		@content;
+	}
+}
+
+@mixin mask-fullsize($pseudo: "before") {
+	@include mask($pseudo) {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		@content;
+	}
+}
+
+// SVG icons
+@mixin svg-icon-size($width: auto, $height: auto, $padding: 0) {
+	display: block;
+	width: $width;
+	height: $height;
+	overflow: hidden;
+
+	svg {
+		$space: $padding * 2;
+		display: block;
+		width: ($width - $space);
+		height: ($height - $space);
+		margin: $padding;
+	}
+}
+
+@mixin svg-icon-style($fill-color: null, $bg-color: null, $hover-fill: null, $hover-bg: null, $round: false) {
+	background-color: $bg-color;
+	color: $fill-color;
+
+	@if $round == true { border-radius: 100%; }
+	
+	svg { fill: $fill-color; }
+
+	@include hover {
+		background-color: $hover-bg;
+		color: $hover-fill;
+
+		svg { fill: $hover-fill; }
+	}
+}
+
+@mixin svg-icon($width: auto, $height: auto, $padding: 0, $fill-color: null, $bg-color: null, $hover-fill: null, $hover-bg: null, $round: false) {
+	@include svg-icon-size($width, $height, $padding);
+	@include svg-icon-style($fill-color, $bg-color, $hover-fill, $hover-bg, $round);
+}

@@ -1,0 +1,8 @@
+#header_main {
+    @include flex-all($justify: space-between);
+    height: 40px;
+} 
+
+.header-logo {
+    a { @include image-replace($header-logo-width, $header-logo-height, $image: $header-logo-name); }
+}

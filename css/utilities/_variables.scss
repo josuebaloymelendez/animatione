@@ -1,0 +1,21 @@
+// Colors
+$primary-color:         $color-red-100;
+$color-primary:         $color-light-100;
+$color-over-primary:    $color-primary;
+
+$secondary-color:       $color-dark-200;
+$color-secondary:       $color-light-100;
+$color-over-secondary:  $color-secondary;
+
+// Breakpoints
+$vs-media:              600px; 
+$vm-media:              900px;
+$vl-media:              1200px;
+
+// Logo
+$header-logo-width:     168px;
+$header-logo-height:    19px;
+$header-logo-name:      "../images/animatione_logo.png";
+
+// Font
+$primary-font:          'Lato', sans-serif;

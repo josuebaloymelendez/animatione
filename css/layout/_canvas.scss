@@ -1,0 +1,236 @@
+.workspace {
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    height: calc(100% - 98px);
+    background-color: $color-light-100;
+    box-shadow: 0 0 30px rgba($color-dark-200, .1);
+    overflow: hidden;
+
+    &-inner { height: 100%; }
+}
+
+#canvas {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-light-100;
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+    }
+
+    &:before {
+        top: 0;
+        left: 50%;
+        height: 100%;
+        border-left: 1px dashed darken($color-light-200, 10%);
+    }
+
+    &:after {
+        top: 50%;
+        left: 0;
+        width: 100%;
+        border-top: 1px dashed darken($color-light-200, 10%);
+    }
+}
+
+#id_serie,
+.show-code {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 9px;
+    font-size: .85rem;
+}
+
+#id_serie {
+    color: $color-primary;
+    background-color: $primary-color;
+}
+
+.show-code {
+    top: -36px;
+    color: $color-secondary;
+    background-color: $secondary-color;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+
+    @include hover-bg-color($primary-color, $color-primary);
+}
+
+.preview-list,
+.code-list {
+    @include flex-all($direction: column);
+    height: 100%;
+
+    .code-list-tab {
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        transition: all .5s ease-in-out;
+    }
+
+    .tab-labels-list {
+        height: 20px;
+        background-color: $secondary-color;
+        transition: all .3s ease-in-out;
+    }
+
+    .tab-label {
+        @include flex(1);
+
+        a {
+            @include flex-all($justify: center, $align: center);
+            height: 20px;
+            color: $color-light-100;
+            text: {
+                align: center;
+                transform: uppercase;
+            }
+            transition: background-color .3s ease-in-out;
+
+            @include hover-bg-color($primary-color, $color-primary);
+        }
+
+        &.ui-tabs-active a { 
+            color: $color-dark-300;
+            background-color: $color-dark-100;
+        }
+    }
+
+    .tabs-group { 
+        @include flex-all($justify: center, $align: center);
+        height: 100%; 
+        background-image: url(../images/code.png);
+    }
+}
+
+.preview-container {
+    display: none;
+    position: relative;
+    height: 100%;
+
+    &.item-active {
+        display: block;
+
+        .preview-inner {
+            margin-left: 0;
+            opacity: 1;
+        }
+    }
+
+    .preview-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -65%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: all .5s ease-in-out;
+    }
+
+    @include hover {
+        .show-code { top: 0; }
+        .preview-list .tab-labels-list { bottom: 0; }
+    }
+}
+
+.preview-list {     
+    .tabs-group { background-image: none !important; }
+
+    .tab-labels-list {
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+    }
+}
+
+#preview1 {
+    width: 100%;
+    height: 100%;
+
+    .read-more-links-group {
+        @include flex-all($justify: center, $align: center);
+        width: 100%;
+        height: 100%;
+    }
+
+    .read-more-link {
+        padding: 30px 60px;
+        color: $color-primary;
+        background-color: $primary-color;
+    }
+}
+
+.code-container { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+
+    &.item-active { z-index: 9; }
+
+    @include hover {
+        .actions-list { top: 0; }
+        .code-list-tab { bottom: 0; }
+    }
+}
+
+.actions-list {
+    position: absolute;
+    top: -34px;
+    left: 0;
+    width: 100%;
+    background-color: $secondary-color;
+    box-shadow: 0 0 30px rgba($color-dark-100, .5);
+    transition: top .5s ease-in-out;
+
+    .items-list { @include flexbox; }
+
+    .item {
+        @include flex(1);
+
+        &-inner {
+            @include flex-all($justify: center, $align: center);
+            height: 34px;
+            color: $color-dark-300;
+            text: {
+                transform: uppercase;
+                align: center;
+            }
+            transition: background-color .3s ease-in-out;
+
+            @include hover-bg-color($primary-color, $color-primary);
+        }
+
+        &-active {
+            color: $color-light-300;
+
+            .item-inner { @include hover-color($color-light-300); }
+        }
+
+        &-preview {
+            a {
+                color: $color-primary;
+                background-color: $primary-color;
+                transition: background-color .3s ease-in-out;
+                cursor: pointer;
+
+                @include hover-bg-color($color-dark-100, $color-light-100);
+            }
+        }
+    }
+}
+
+.fx-fade { @include fade; }

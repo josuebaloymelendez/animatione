@@ -1,0 +1,12 @@
+.tabs-container {
+
+	.tab-labels-list { 
+		@include flexbox;
+	}
+
+	.tab-label {
+		@include hover { cursor: pointer; }
+		
+		svg { pointer-events: none; }
+	}
+}

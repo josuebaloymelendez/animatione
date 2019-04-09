@@ -1,0 +1,22 @@
+.content-title {
+    em {
+        margin-left: 8px;
+        color: $primary-color;
+        font-style: normal;
+    }
+}
+
+.title-vs {
+    font: {
+        size: .85rem;
+        weight: 300;
+    }
+    text-transform: uppercase;
+}
+
+.title-vl {
+    font: {
+        size: 1.8rem;
+        weight: 400;
+    }
+}
